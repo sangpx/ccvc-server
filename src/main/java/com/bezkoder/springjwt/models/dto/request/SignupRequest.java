@@ -1,4 +1,4 @@
-package com.bezkoder.springjwt.payload.request;
+package com.bezkoder.springjwt.models.dto.request;
 
 import java.util.Set;
 
