@@ -14,15 +14,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
-
   private Long id;
-
   private String username;
-
   private String email;
-
   @JsonIgnore
   private String password;
+
 
   private Collection<? extends GrantedAuthority> authorities;
 
@@ -35,11 +32,13 @@ public class UserDetailsImpl implements UserDetails {
     this.authorities = authorities;
   }
 
+  //Tu thong tin User -> thong tin UserDetailsImpl
   public static UserDetailsImpl build(User user) {
+    //lay cac quyen tu user truyen vao
     List<GrantedAuthority> authorities = user.getRoles().stream()
         .map(role -> new SimpleGrantedAuthority(role.getName().name()))
         .collect(Collectors.toList());
-
+    // tra ra doi tuong UserDetailsImpl
     return new UserDetailsImpl(
         user.getId(), 
         user.getUsername(), 
@@ -48,6 +47,7 @@ public class UserDetailsImpl implements UserDetails {
         authorities);
   }
 
+  //Lay ra cac quyen cua User do
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return authorities;

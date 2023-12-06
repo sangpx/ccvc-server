@@ -19,7 +19,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
 public class AuthEntryPointJwt implements AuthenticationEntryPoint {
-
+  //Phương thức này sẽ được kích hoạt bất cứ lúc nào Người dùng không được
+  // xác thực yêu cầu tài nguyên HTTP được bảo mật và tài nguyên AuthenticationExceptionđược gửi đi.
   private static final Logger logger = LoggerFactory.getLogger(AuthEntryPointJwt.class);
 
   @Override

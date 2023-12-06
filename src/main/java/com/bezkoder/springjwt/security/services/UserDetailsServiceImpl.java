@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.security.services;
 
+import com.bezkoder.springjwt.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,12 +14,12 @@ import com.bezkoder.springjwt.repository.UserRepository;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
   @Autowired
-  UserRepository userRepository;
+  private UserService userService;
 
   @Override
   @Transactional
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = userRepository.findByUsername(username)
+    User user = userService.findByUsername(username)
         .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
 
     return UserDetailsImpl.build(user);
