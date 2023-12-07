@@ -12,6 +12,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.bezkoder.springjwt.models.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+
+/*
+UserDetailschứa các thông tin cần thiết (như: tên người dùng, mật khẩu, quyền hạn) để xây dựng đối tượng Xác thực.
+ */
+
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
   private Long id;

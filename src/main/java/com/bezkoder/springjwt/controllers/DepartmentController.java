@@ -29,13 +29,13 @@ public class DepartmentController {
     }
 
     //Create Department
-    @PreAuthorize("hasRole('ADMIN') or hasRole('USER') or hasRole('MODERATOR')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @PostMapping("/addDepartment")
     public Department addDepartment(@RequestBody Department department) {
         return departmentSerivce.createDepartment(department);
     }
     //Update Department
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @PutMapping("/updateDepartment")
     public  Department updateDepartment(@RequestBody Department department) {
         return departmentSerivce.updateDepartment(department);

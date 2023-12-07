@@ -64,6 +64,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+
+    /*
+        - Phương thức findAll (Pageable pageable) theo mặc định trả về một đối tượng Page<T>
+        - PageRequest là một lớp trong JPA dùng để đại diện cho yêu cầu phân trang.
+        Nó thường được sử dụng khi bạn muốn lấy một trang cụ thể của dữ liệu từ CSDL.
+        + offSet: Đây là vị trí bắt đầu của trang. Vị trí này được tính từ 0, nghĩa là offSet = 0
+        + pageSize: Đây là kích thước của mỗi trang, tức là số lượng phần tử bạn muốn lấy từ cơ sở dữ liệu cho mỗi trang
+     */
     @Override
     public Page<Employee> getAllPagingEmployees(int offSet, int pageSize) {
         Page<Employee> employees = employeeRepository.findAll(PageRequest.of(offSet, pageSize));

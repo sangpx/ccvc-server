@@ -19,6 +19,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.bezkoder.springjwt.security.services.UserDetailsServiceImpl;
 
+
+/*
+OncePerRequestFilterthực hiện một lần thực thi duy nhất cho mỗi yêu cầu đối với API.
+ Nó cung cấp một phương thức doFilterInternal() mà chúng ta sẽ triển khai phân tích cú pháp và xác thực JWT,
+ tải thông tin chi tiết về Người dùng (bằng cách sử dụng UserDetailsService),
+ kiểm tra Ủy quyền (bằng cách sử dụng UsernamePasswordAuthenticationToken).
+ */
+
 public class AuthTokenFilter extends OncePerRequestFilter {
   @Autowired
   private JwtUtils jwtUtils;

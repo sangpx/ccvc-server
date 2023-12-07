@@ -20,6 +20,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.bezkoder.springjwt.security.jwt.AuthEntryPointJwt;
 import com.bezkoder.springjwt.security.jwt.AuthTokenFilter;
 import com.bezkoder.springjwt.security.services.UserDetailsServiceImpl;
+/*
+WebSecurityConfiglà mấu chốt trong việc triển khai bảo mật của chúng tôi.
+ Nó cấu hình cors, csrf, quản lý phiên, quy tắc cho tài nguyên được bảo vệ.
+*/
 
 @Configuration
 @EnableMethodSecurity
@@ -36,10 +40,6 @@ public class WebSecurityConfig {
     return new AuthTokenFilter();
   }
 
-//  @Override
-//  public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-//    authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//  }
   
   @Bean
   public DaoAuthenticationProvider authenticationProvider() {
@@ -50,11 +50,13 @@ public class WebSecurityConfig {
    
       return authProvider;
   }
-//  @Bean
-//  @Override
-//  public AuthenticationManager authenticationManagerBean() throws Exception {
-//    return super.authenticationManagerBean();
-//  }
+
+  /*
+  AuthenticationManagercó DaoAuthenticationProvider(với sự trợ giúp của UserDetailsService &
+  PasswordEncoder)
+  để xác thực đối tượng UsernamePasswordAuthenticationToken. Nếu thành công,
+  AuthenticationManager sẽ trả về một đối tượng Xác thực được điền đầy đủ (bao gồm cả các quyền được cấp).
+   */
   @Bean
   public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
     return authConfig.getAuthenticationManager();
@@ -64,30 +66,25 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-//  @Override
-//  protected void configure(HttpSecurity http) throws Exception {
-//    http.cors().and().csrf().disable()
-//      .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-//      .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-//      .authorizeRequests().antMatchers("/api/auth/**").permitAll()
-//      .antMatchers("/api/test/**").permitAll()
-//      .anyRequest().authenticated();
-//
-//    http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-//  }
+
+  //Config SecurityFilterChain: là một phần quan trọng của cấu hình bảo mật trong Spring Security
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.csrf(csrf -> csrf.disable())
+    http.csrf(csrf -> csrf.disable()) // disable csrf
+            // tra ve exception khi xảy ra người dùng không xác thực
         .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
+            //không lưu trữ trạng thái phiên
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> 
-          auth.requestMatchers("/api/auth/**").permitAll()
+          auth.requestMatchers("/api/auth/**").permitAll() // Cho phep tat ca moi nguoi truy cap
               .requestMatchers("/api/**").permitAll()
               .anyRequest().authenticated()
         );
-    
+
+
     http.authenticationProvider(authenticationProvider());
 
+    //Thêm Filter: Filter này được sử dụng để xử lý xác thực thông qua token (JWT).
     http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     
     return http.build();
