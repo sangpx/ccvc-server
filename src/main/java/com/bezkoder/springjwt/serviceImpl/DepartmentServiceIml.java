@@ -30,7 +30,8 @@ public class DepartmentServiceIml implements DepartmentSerivce {
     @Override
     public Department updateDepartment(Department department) {
         //Tim Kiem Department da ton tai
-        Department existingDepartment = departmentRepository.findById(department.getDepartmentID()).orElse(null);
+        Department existingDepartment = departmentRepository.findById(department.getDepartmentID())
+                .orElse(null);
         //Thuc hien Update
         existingDepartment.setDepartmentCode(department.getDepartmentCode());
         existingDepartment.setDepartmentName(department.getDepartmentName());
