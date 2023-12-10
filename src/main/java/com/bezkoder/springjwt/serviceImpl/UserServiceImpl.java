@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Service
+@Service //Đánh dấu một Class là tầng Service, phục vụ các logic nghiệp vụ.
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;

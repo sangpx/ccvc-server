@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-@Service
+@Service //Đánh dấu một Class là tầng Service, phục vụ các logic nghiệp vụ.
 
 public class RoleServiceImpl implements RoleService {
 
