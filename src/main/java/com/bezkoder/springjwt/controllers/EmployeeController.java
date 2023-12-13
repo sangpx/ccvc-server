@@ -1,44 +1,71 @@
 package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.PagedResult;
+import com.bezkoder.springjwt.models.dto.department.DepartmentDTO;
+import com.bezkoder.springjwt.models.dto.employee.EmployeeCreateDto;
+import com.bezkoder.springjwt.models.dto.employee.EmployeeDTO;
+import com.bezkoder.springjwt.models.dto.employee.EmployeeUpdateDto;
+import com.bezkoder.springjwt.models.entity.Department;
 import com.bezkoder.springjwt.models.entity.Employee;
 import com.bezkoder.springjwt.services.EmployeeService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
     @Autowired
+    private ModelMapper modelMapper;
+    @Autowired
     private EmployeeService employeeService;
 
     //Get All Employee
     @GetMapping("/getAllEmployee")
     @PreAuthorize("hasRole('ADMIN')")
-    public  Iterable<Employee> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeService.getAllEmployees().stream()
+                .map(employee -> modelMapper.map(employee, EmployeeDTO.class)).collect(Collectors.toList());
     }
     //Get Employee By ID
     @GetMapping("/getEmployeeById/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Employee getEmployeeById(@PathVariable() Integer id) {
-        return employeeService.getEmployeeById(id);
+    public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable() Integer id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
+        return ResponseEntity.ok().body(employeeDTO);
+
     }
 
     //Create Employee
     @PostMapping("/addEmployee")
     @PreAuthorize("hasRole('ADMIN')")
-    public  Employee addEmployee(@RequestBody Employee employee) {
-        return employeeService.createEmployee(employee);
+    public  ResponseEntity<EmployeeDTO> addEmployee(@RequestBody EmployeeCreateDto request) {
+        // convert DTO sang Entity
+        Employee employeeRequest = modelMapper.map(request, Employee.class);
+        Employee employee =  employeeService.createEmployee(employeeRequest);
+        // convert entity sang DTO
+        EmployeeDTO employeeResponse = modelMapper.map(employee, EmployeeDTO.class);
+        return new ResponseEntity<EmployeeDTO>(employeeResponse, HttpStatus.CREATED);
     }
     //Update Employee
     @PutMapping("/updateEmployee")
     @PreAuthorize("hasRole('ADMIN')")
-    public Employee updateEmployee(@RequestBody Employee employee) {
-        return employeeService.updateEmployee(employee);
+    public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody EmployeeUpdateDto request) {
+        // convert DTO sang Entity
+        Employee employeeRequest = modelMapper.map(request, Employee.class);
+        Employee employee =  employeeService.updateEmployee(employeeRequest);
+        // convert entity sang DTO
+        EmployeeDTO employeeResponse = modelMapper.map(employee, EmployeeDTO.class);
+        return ResponseEntity.ok().body(employeeResponse);
     }
 
     //Delete Employee

@@ -6,13 +6,15 @@ import com.bezkoder.springjwt.services.DepartmentSerivce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service //Đánh dấu một Class là tầng Service, phục vụ các logic nghiệp vụ.
 
 public class DepartmentServiceIml implements DepartmentSerivce {
     @Autowired
     private DepartmentRepository departmentRepository;
     @Override
-    public Iterable<Department> getAllDepartments() {
+    public List<Department> getAllDepartments() {
         return  departmentRepository.findAll();
     }
 
