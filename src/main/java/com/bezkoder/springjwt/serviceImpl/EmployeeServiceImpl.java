@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service //Đánh dấu một Class là tầng Service, phục vụ các logic nghiệp vụ.
 
 public class EmployeeServiceImpl implements EmployeeService {
@@ -15,7 +17,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public Iterable<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() {
         return  employeeRepository.findAll();
     }
 

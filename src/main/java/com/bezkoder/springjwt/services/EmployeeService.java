@@ -3,8 +3,10 @@ package com.bezkoder.springjwt.services;
 import com.bezkoder.springjwt.models.entity.Employee;
 import org.springframework.data.domain.Page;
 
+import java.util.List;
+
 public interface EmployeeService {
-    Iterable<Employee> getAllEmployees();
+    List<Employee> getAllEmployees();
     Employee getEmployeeById(Integer id);
     Employee createEmployee(Employee employee);
     Employee updateEmployee(Employee employee);
