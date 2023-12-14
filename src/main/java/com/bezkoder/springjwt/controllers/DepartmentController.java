@@ -15,7 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "*")
+
+/*
+CORS là một chính sách an toàn được thiết kế để ngăn chặn các trang web
+từ việc yêu cầu tài nguyên từ một nguồn khác với nguồn của trang web gốc. Khi sử dụng @CrossOrigin(origins = "*"),
+bạn đang chỉ định rằng tất cả các nguồn  đều được phép truy cập tài nguyên từ endpoint.
+ */
+@CrossOrigin(origins = "*") // xử lý vấn đề CORS (Cross-Origin Resource Sharing).
 @RestController
 // localhost:8080/api/departments/getAllDepartment
 @RequestMapping("/api/departments")
@@ -57,7 +63,7 @@ public class DepartmentController {
     //Update Department
     @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @PutMapping("/updateDepartment")
-    public  ResponseEntity<DepartmentDTO> updateDepartment(@RequestBody DepartmentDTO request) {
+    public  ResponseEntity<DepartmentDTO> updateDepartment(@RequestBody DepartmentUpdateDto request) {
         // convert DTO sang Entity
         Department departmentRequest = modelMapper.map(request, Department.class);
         Department department = departmentSerivce.updateDepartment(departmentRequest);

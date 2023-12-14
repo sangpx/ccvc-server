@@ -1,11 +1,9 @@
 package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.PagedResult;
-import com.bezkoder.springjwt.models.dto.department.DepartmentDTO;
 import com.bezkoder.springjwt.models.dto.employee.EmployeeCreateDto;
 import com.bezkoder.springjwt.models.dto.employee.EmployeeDTO;
 import com.bezkoder.springjwt.models.dto.employee.EmployeeUpdateDto;
-import com.bezkoder.springjwt.models.entity.Department;
 import com.bezkoder.springjwt.models.entity.Employee;
 import com.bezkoder.springjwt.services.EmployeeService;
 import org.modelmapper.ModelMapper;

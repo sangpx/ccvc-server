@@ -1,9 +1,16 @@
 package com.bezkoder.springjwt.models.dto.employee;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeUpdateDto {
     private Integer employeeid;
     @NotEmpty(message = "EmployeeCode should not be null or empty")
@@ -24,6 +31,8 @@ public class EmployeeUpdateDto {
     private String identityIssurePlace;
     private String identityNumber;
     private String landlineNumber;
+    private String createdBy;
+    private LocalDateTime createdDate;
     private String modifiedBy;
     private LocalDateTime modifiedDate;
 }

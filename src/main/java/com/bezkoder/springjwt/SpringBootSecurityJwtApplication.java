@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringBootSecurityJwtApplication {
-
+	//Cau hinh modelMapper trong project
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();
