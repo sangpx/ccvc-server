@@ -71,6 +71,7 @@ public class AuthController {
                          userDetails.getEmail(), 
                          roles));
   }
+
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userService.existsByUsername(signUpRequest.getUsername())) {
