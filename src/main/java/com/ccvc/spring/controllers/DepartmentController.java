@@ -30,8 +30,8 @@ public class DepartmentController {
     @Autowired
     private ModelMapper modelMapper;
 
-    @Autowired //tu dong tao ra DI dung chung cho ca ung dung - Inject DepartmentServiceImpl
-    private DepartmentSerivce departmentSerivce;
+        @Autowired //tu dong tao ra DI dung chung cho ca ung dung - Inject DepartmentServiceImpl
+        private DepartmentSerivce departmentSerivce;
 
     //Get All Department
     @PreAuthorize("hasRole('ADMIN')")
