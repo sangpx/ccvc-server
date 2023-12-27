@@ -21,7 +21,7 @@ CORS là một chính sách an toàn được thiết kế để ngăn chặn c�
 từ việc yêu cầu tài nguyên từ một nguồn khác với nguồn của trang web gốc. Khi sử dụng @CrossOrigin(origins = "*"),
 bạn đang chỉ định rằng tất cả các nguồn  đều được phép truy cập tài nguyên từ endpoint.
  */
-@CrossOrigin(origins = "http://localhost:8080", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 // localhost:8080/api/departments/getAllDepartment
 @RequestMapping("/api/departments")
