@@ -54,10 +54,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         existingEmployee.setIdentityNumber(employee.getIdentityNumber());
         existingEmployee.setPhoneNumber(employee.getPhoneNumber());
         existingEmployee.setGender(employee.getGender());
-        existingEmployee.setCreatedBy(employee.getCreatedBy());
-        existingEmployee.setCreatedDate(employee.getCreatedDate());
-        existingEmployee.setModifiedBy(employee.getModifiedBy());
-        existingEmployee.setModifiedDate(employee.getModifiedDate());
         return  employeeRepository.save(employee);
     }
 

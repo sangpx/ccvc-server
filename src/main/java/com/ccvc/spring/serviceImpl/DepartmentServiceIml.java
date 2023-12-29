@@ -37,10 +37,6 @@ public class DepartmentServiceIml implements DepartmentSerivce {
         //Thuc hien Update
         existingDepartment.setDepartmentCode(department.getDepartmentCode());
         existingDepartment.setDepartmentName(department.getDepartmentName());
-        existingDepartment.setCreatedBy(department.getCreatedBy());
-        existingDepartment.setCreatedDate(department.getCreatedDate());
-        existingDepartment.setModifiedBy(department.getModifiedBy());
-        existingDepartment.setModifiedDate(department.getModifiedDate());
         return  departmentRepository.save(department);
     }
 

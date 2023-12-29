@@ -34,14 +34,14 @@ public class DepartmentController {
         private DepartmentSerivce departmentSerivce;
 
     //Get All Department
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/getAllDepartment")
     public List<DepartmentDTO> getAllDepartments() {
             return departmentSerivce.getAllDepartments().stream()
                     .map(department -> modelMapper.map(department, DepartmentDTO.class)).collect(Collectors.toList());
     }
     //Get Department By ID
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/getDepartmentById/{id}")
     public ResponseEntity<DepartmentDTO> getDepartmentById(@PathVariable() Integer id) {
         Department department =  departmentSerivce.getDepartmentById(id);
@@ -50,7 +50,7 @@ public class DepartmentController {
     }
 
     //Create Department
-    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
+//    @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
     @PostMapping("/addDepartment")
     public ResponseEntity<DepartmentDTO> addDepartment(@RequestBody DepartmentCreateDto request) {
         // convert DTO sang Entity
@@ -62,7 +62,7 @@ public class DepartmentController {
     }
     //Update Department
     @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
-    @PutMapping("/updateDepartment")
+    @PutMapping("/updateDepartment")    
     public  ResponseEntity<DepartmentDTO> updateDepartment(@RequestBody DepartmentUpdateDto request) {
         // convert DTO sang Entity
         Department departmentRequest = modelMapper.map(request, Department.class);
@@ -71,7 +71,7 @@ public class DepartmentController {
         DepartmentDTO departmentResponse = modelMapper.map(department, DepartmentDTO.class);
         return ResponseEntity.ok().body(departmentResponse);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     //Delete Department
     @DeleteMapping("/deleteDepartment/{id}")
     public void deleteDepartment(@PathVariable() Integer id) {

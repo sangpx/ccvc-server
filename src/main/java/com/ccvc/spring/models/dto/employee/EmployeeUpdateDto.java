@@ -31,8 +31,4 @@ public class EmployeeUpdateDto {
     private String identityIssurePlace;
     private String identityNumber;
     private String landlineNumber;
-    private String createdBy;
-    private LocalDateTime createdDate;
-    private String modifiedBy;
-    private LocalDateTime modifiedDate;
 }
